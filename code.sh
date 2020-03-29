@@ -1,8 +1,8 @@
 #!/bin/bash
 
-APP_ID='885522048871-fhhejrcho5gk2hfm5gbhq8tmdvusl7nn.apps.googleusercontent.com'
-APP_SECRET='JFe3sty9y7nbtA_0LGvp68JQ'
-URI='https://ssingh.wmdd4950.com/oauth/'
+APP_ID=''
+APP_SECRET=''
+URI=''
 
 echo "content-type: application/json"
 echo ""
