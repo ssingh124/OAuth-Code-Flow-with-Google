@@ -1,0 +1,54 @@
+
+
+<html>
+    <head>
+	<style>
+	</style>
+    </head>
+    <body>
+
+	<script>
+	 // if page doesn't include auth code, we need to authroize
+if (!document.location.href.includes('code')) {
+	// this will redirect the page to google, then back	
+var login_url =  [`https://accounts.google.com/o/oauth2/v2/auth?client_id=********************`,
+							  `redirect_uri=https://ssingh.wmdd4950.com/oauth/`,
+							  `response_type=code`,
+							  `scope=openid profile email`].join('&');
+
+	var login_button = document.createElement('button');
+	login_button.innerHTML = 'Login to Google';
+	login_button.addEventListener('click', evt => {
+	document.location.href = login_url;
+	});
+	document.body.append(login_button);
+} else {
+	// we have a code
+	console.log('got a code!!');
+
+	// Retrieve access token with custom api
+	var params = new URLSearchParams(location.search);
+	var code = params.get('code');
+
+	fetch(`https://ssingh.wmdd4950.com/cgi-bin/code.sh?${code}`)
+	.then(respond => {
+		if (respond.status == 200) {
+		return respond.json();
+		} else {
+		throw "Cannot get token";
+		}
+	})
+	.then((json) => {
+		console.log(json);
+		if (json.access_token) {
+		tokenNode = document.createElement('div');
+		tokenNode.innerHTML = json.access_token;
+		document.body.append(tokenNode);
+		} else {
+		// we probably have an error
+		}
+	});
+}
+	</script>
+    </body>
+</html>
