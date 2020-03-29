@@ -1,5 +1,3 @@
-
-
 <html>
     <head>
 	<style>
@@ -9,18 +7,22 @@
 
 	<script>
 	 // if page doesn't include auth code, we need to authroize
+	 
 if (!document.location.href.includes('code')) {
 	// this will redirect the page to google, then back	
-var login_url =  [`https://accounts.google.com/o/oauth2/v2/auth?client_id=********************`,
+var login_url =  [`https://accounts.google.com/o/oauth2/v2/auth?client_id=885522048871-fhhejrcho5gk2hfm5gbhq8tmdvusl7nn.apps.googleusercontent.com`,
 							  `redirect_uri=https://ssingh.wmdd4950.com/oauth/`,
 							  `response_type=code`,
 							  `scope=openid profile email`].join('&');
+
+
 
 	var login_button = document.createElement('button');
 	login_button.innerHTML = 'Login to Google';
 	login_button.addEventListener('click', evt => {
 	document.location.href = login_url;
 	});
+
 	document.body.append(login_button);
 } else {
 	// we have a code
